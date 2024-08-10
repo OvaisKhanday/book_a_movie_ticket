@@ -1,0 +1,17 @@
+const mongoose = require("mongoose");
+
+async function connectDB() {
+  console.log(process.env.PORT);
+  const mongoURI = `${process.env.DB_URL}${process.env.DB_NAME}`;
+  mongoose
+    .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+      console.log("connection established with mongodb server online");
+    })
+    .catch((err) => {
+      console.log("error while connection", err);
+      throw new Error("Failed To Connect");
+    });
+}
+
+module.exports = connectDB;
