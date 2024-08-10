@@ -1,11 +1,12 @@
 const express = require("express");
 const { bookingRouter } = require("./routes/booking");
+const cors = require("cors");
 const connectDB = require("./db/db_connection");
 const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 app.use("/api", bookingRouter);
