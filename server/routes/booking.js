@@ -20,7 +20,7 @@ router.get("/booking", async (req, res) => {
     movie = await getLatestBookedMovie();
     res.status(200).json(movie);
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(500).json({ message: "There was an error" });
   }
 });

@@ -9,7 +9,7 @@ async function connectDB() {
       console.log("connection established with mongodb server online");
     })
     .catch((err) => {
-      console.log("error while connection", err);
+      console.error("error while connection", err.message);
       throw new Error("Failed To Connect");
     });
 }
