@@ -21,22 +21,19 @@ function App() {
   const initialSeats: SeatsInterface = { A1: 0, A2: 0, A3: 0, A4: 0, D1: 0, D2: 0 };
   const [movieState, setMovieState] = useState<string>(localStorage.getItem("movie") ?? "");
   const [slotState, setSlotState] = useState<string>(localStorage.getItem("slot") ?? "");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [seatsState, setSeatsState] = useState<SeatsInterface>(JSON.parse(localStorage.getItem("seats") ?? JSON.stringify(initialSeats)));
 
   const [latestBooking, setLatestBooking] = useState<Booking | null>(null);
 
   async function getLatestBooking() {
-    const response = await fetch("http://localhost:8080/api/booking");
+    const response = await fetch("https://book-a-movie-ticket.onrender.com/api/booking");
     const body = await response.json();
     return { movie: body.movie, slot: body.slot, seats: body.seats };
   }
 
   useEffect(() => {
-    getLatestBooking()
-      .then(setLatestBooking)
-      .catch((error) => {
-        alert("Error while fetching last booking details" + error.message);
-      });
+    getLatestBooking().then(setLatestBooking);
   }, []);
 
   async function handleBook() {
@@ -44,7 +41,8 @@ function App() {
     else if (slotState === "") alert("slot not selected");
     else if (Object.values(seatsState).reduce((acc: number, obj: number) => acc + obj, 0) < 1) alert("seat not selected");
     else {
-      fetch("http://localhost:8080/api/booking", {
+      setIsSubmitting(true);
+      fetch("https://book-a-movie-ticket.onrender.com/api/booking", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -53,11 +51,8 @@ function App() {
         body: JSON.stringify({ movie: movieState, slot: slotState, seats: seatsState }),
       })
         .then(() => {
-          getLatestBooking()
-            .then(setLatestBooking)
-            .catch(() => {
-              alert("Error while fetching last booking details");
-            });
+          getLatestBooking().then(setLatestBooking);
+
           localStorage.removeItem("movie");
           localStorage.removeItem("slot");
           localStorage.removeItem("seats");
@@ -68,7 +63,8 @@ function App() {
         })
         .catch(() => {
           alert("There occurred an error");
-        });
+        })
+        .finally(() => setIsSubmitting(false));
     }
   }
 
@@ -125,7 +121,13 @@ function App() {
             ))}
           </div>
           <div className='book-button'>
-            <button onClick={handleBook}>Book</button>
+            {isSubmitting ? (
+              <button disabled className='booking-loader'>
+                booking...
+              </button>
+            ) : (
+              <button onClick={handleBook}>Book</button>
+            )}
           </div>
         </main>
         <aside className='last-order'>
