@@ -19,6 +19,5 @@ connectDB()
     });
   })
   .catch((error) => {
-    console.error(error.message);
-    console.log("Cannot start server");
+    console.error("Cannot start server", error.message);
   });
