@@ -2,7 +2,12 @@
   display: flex;
   gap: 10px;
   align-items: start;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 0px 5px gray;
 }
+
 main {
   flex: 2;
 }
@@ -15,10 +20,8 @@ main {
   cursor: pointer;
   color: rgb(0, 0, 0);
   border: 1px rgb(0, 0, 0) ridge;
-  padding: 18px 15px;
-  line-height: 1px;
+  padding: 5px 10px;
   border-radius: 5px;
-  /* box-shadow: 0 0 5px 5px; */
 }
 
 .movie-row,
@@ -35,6 +38,10 @@ main {
   text-align: center;
   padding-top: 0px;
   padding-bottom: 10px;
+}
+.seat-column h4 {
+  margin: 0px;
+  padding: 2px;
 }
 
 .book-button button {
