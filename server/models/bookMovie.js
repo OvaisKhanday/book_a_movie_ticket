@@ -1,14 +1,17 @@
 const { Schema } = require("mongoose");
 const mongoose = require("mongoose");
 
-const seatSchema = new Schema({
-  A1: { type: Schema.Types.Number, required: true },
-  A2: { type: Schema.Types.Number, required: true },
-  A3: { type: Schema.Types.Number, required: true },
-  A4: { type: Schema.Types.Number, required: true },
-  D1: { type: Schema.Types.Number, required: true },
-  D2: { type: Schema.Types.Number, required: true },
-});
+const seatSchema = new Schema(
+  {
+    A1: { type: Schema.Types.Number, required: true },
+    A2: { type: Schema.Types.Number, required: true },
+    A3: { type: Schema.Types.Number, required: true },
+    A4: { type: Schema.Types.Number, required: true },
+    D1: { type: Schema.Types.Number, required: true },
+    D2: { type: Schema.Types.Number, required: true },
+  },
+  { _id: false }
+);
 
 const bookMovieSchema = new Schema({
   movie: { type: Schema.Types.String, required: true },

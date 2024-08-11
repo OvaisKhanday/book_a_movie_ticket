@@ -1,7 +1,8 @@
 const BookMovieCollection = require("../models/bookMovie");
 
 async function getLatestBookedMovie() {
-  return await BookMovieCollection.find({}).sort({ _id: -1 }).limit(1);
+  const movies = await BookMovieCollection.find({}).sort({ _id: -1 }).limit(1);
+  return movies != null ? movies[0] : null;
 }
 async function bookMovie(movie) {
   const newMovieTicket = new BookMovieCollection(movie);
