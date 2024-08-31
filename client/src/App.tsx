@@ -156,6 +156,10 @@ function App() {
           )}
         </aside>
       </div>
+      <p className='caption'>
+        🤖⏳The server code is deployed on Free tier render.com so please have patience. It might take upto 1 minute to get the server started. In the
+        meantime you cannot either see the latest booking details nor add a booking
+      </p>
     </>
   );
 }

@@ -89,3 +89,12 @@ input {
 .last-seats {
   line-height: 3px;
 }
+
+.caption {
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: brown;
+}
